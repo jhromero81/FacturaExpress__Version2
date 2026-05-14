@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacturaExpress – Clientes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/accessibility-bootstrap.js"></script>
+</head>
+<body>
+
+<div class="fx-sidebar">
+  <a class="fx-sidebar-logo" href="index.html">
+    <div class="fx-logo-box">F</div>
+    <span class="fx-logo-text">FacturaExpress</span>
+  </a>
+  <div class="fx-sidebar-nav">
+    <a class="fx-nav-item" href="index.html"><i class="material-icons">dashboard</i> Panel Principal</a>
+    <a class="fx-nav-item" href="ventas.html"><i class="material-icons">shopping_cart</i> Gestión de Ventas</a>
+    <a class="fx-nav-item" href="facturacion.html"><i class="material-icons">description</i> Facturación Electrónica</a>
+    <a class="fx-nav-item fx-active" href="clientes.html"><i class="material-icons">group</i> Clientes</a>
+    <a class="fx-nav-item" href="reportes.html"><i class="material-icons">bar_chart</i> Reportes y Estadísticas</a>
+    <a class="fx-nav-item" href="configuracion.html"><i class="material-icons">settings</i> Configuración</a>
+  </div>
+  <div class="fx-sidebar-footer">
+    <a class="fx-nav-item fx-logout" href="#" id="showLogoutBtn"><i class="material-icons">logout</i> Cerrar Sesión</a>
+  </div>
+</div>
+
+<div class="fx-main-area">
+  <div class="fx-topbar">
+    <span class="fx-topbar-title">Directorio de Clientes</span>
+    <div class="fx-topbar-dian"><span class="pulse-dot"></span> DIAN SINCRONIZADO</div>
+    <div class="fx-topbar-user">
+      <div class="fx-topbar-user-info">
+        <div class="fx-topbar-user-name">Jhon H. Romero</div>
+        <div class="fx-topbar-user-role">Admin del Sistema</div>
+      </div>
+      <i class="material-icons" style="color:#1a2535;font-size:30px;">account_circle</i>
+    </div>
+  </div>
+
+  <div class="fx-content">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+      <div class="input-field" style="margin:0;flex:1;max-width:340px;">
+        <i class="material-icons prefix" style="color:#90a4ae;">search</i>
+        <input id="bCliente" type="text" oninput="filtrarClientes(this.value)" placeholder="Buscar ID o Nombre...">
+        <label for="bCliente">Búsqueda</label>
+      </div>
+      <a class="btn btn-dark waves-effect waves-light" onclick="document.getElementById('modalOverlay').classList.add('open')">
+        <i class="material-icons left">person_add</i>NUEVO CLIENTE
+      </a>
+    </div>
+
+    <div class="row" id="clientesGrid">
+      <div class="col s12 m6 l4" style="margin-bottom:18px;" data-nombre="Maria Fernanda Gomez" data-id="101020201">
+        <div class="client-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
+            <span class="client-id-tag">ID: 101020201</span>
+          </div>
+          <div class="client-name">Maria Fernanda Gomez</div>
+          <div class="client-email">m.gomez@mail.com</div>
+          <div class="client-actions">
+            <a class="btn-flat" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
+            <a class="btn-flat" href="ventas.html" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4" style="margin-bottom:18px;" data-nombre="Carlos Rodriguez" data-id="101020202">
+        <div class="client-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
+            <span class="client-id-tag">ID: 101020202</span>
+          </div>
+          <div class="client-name">Carlos Rodriguez</div>
+          <div class="client-email">c.rod@mail.com</div>
+          <div class="client-actions">
+            <a class="btn-flat" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
+            <a class="btn-flat" href="ventas.html" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4" style="margin-bottom:18px;" data-nombre="Juan Perez" data-id="101020203">
+        <div class="client-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
+            <span class="client-id-tag">ID: 101020203</span>
+          </div>
+          <div class="client-name">Juan Perez</div>
+          <div class="client-email">j.perez@mail.com</div>
+          <div class="client-actions">
+            <a class="btn-flat" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
+            <a class="btn-flat" href="ventas.html" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4" style="margin-bottom:18px;" data-nombre="Luis Hernandez" data-id="101020204">
+        <div class="client-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
+            <span class="client-id-tag">ID: 101020204</span>
+          </div>
+          <div class="client-name">Luis Hernandez</div>
+          <div class="client-email">l.hernandez@mail.com</div>
+          <div class="client-actions">
+            <a class="btn-flat" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
+            <a class="btn-flat" href="ventas.html" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fx-footer">
+    <span>© 2026 FACTURAEXPRESS – FACTURACIÓN SEGURA</span>
+    <div class="fx-footer-statuses">
+      <div class="fx-f-status"><span class="pulse-dot"></span> MOTOR FISCAL ACTIVO</div>
+      <div class="fx-f-status"><span class="pulse-dot"></span> BACKUPS AL DÍA</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nuevo Cliente -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-title">Nuevo Cliente
+      <i class="material-icons modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">close</i>
+    </div>
+    <div class="input-field"><input id="mId" type="text"><label for="mId">Número de Identificación</label></div>
+    <div class="input-field"><input id="mNombre" type="text"><label for="mNombre">Nombre Completo</label></div>
+    <div class="input-field"><input id="mEmail" type="email"><label for="mEmail">Correo Electrónico</label></div>
+    <div class="input-field"><input id="mTel" type="text"><label for="mTel">Teléfono</label></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:10px;">
+      <a class="btn-flat" onclick="document.getElementById('modalOverlay').classList.remove('open')">Cancelar</a>
+      <a class="btn btn-teal waves-effect waves-light" onclick="document.getElementById('modalOverlay').classList.remove('open')"><i class="material-icons left">save</i>Guardar</a>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE CIERRE DE SESIÓN -->
+<div id="logoutModal" class="modal logout-modal">
+  <div class="modal-content">
+    <div class="logout-header">
+      <div class="logout-icon"><i class="material-icons">exit_to_app</i></div>
+      <h4>¿Cerrar sesión?</h4>
+      <p>Estás a punto de salir del sistema</p>
+    </div>
+    <div class="logout-body">
+      <div class="warning-compact"><i class="material-icons">warning</i><div><strong>¡Atención!</strong><span> Los cambios no guardados se perderán</span></div></div>
+      <div class="session-compact">
+        <div class="session-title-compact"><i class="material-icons tiny">info</i>INFORMACIÓN DE SESIÓN</div>
+        <div class="session-grid">
+          <div class="session-item"><span class="session-label-compact">Usuario</span><span class="session-value-compact" id="sessionUser">Jhon H. Romero</span></div>
+          <div class="session-item"><span class="session-label-compact">Rol</span><span class="session-value-compact" id="sessionRole">Administrador</span></div>
+          <div class="session-item"><span class="session-label-compact">Sesión activa</span><span class="session-value-compact" id="sessionTime">--</span></div>
+          <div class="session-item"><span class="session-label-compact">Última actividad</span><span class="session-value-compact" id="lastActivity">Ahora</span></div>
+        </div>
+      </div>
+      <div class="modal-buttons-compact">
+        <button class="btn btn-cancel-compact modal-close"><i class="material-icons left" style="font-size:16px;">close</i>Cancelar</button>
+        <button class="btn btn-logout-compact" id="confirmLogoutBtn"><i class="material-icons left" style="font-size:16px;">logout</i>Salir Ahora</button>
+      </div>
+      <div class="security-note-compact"><span class="pulse-dot"></span><span>Serás redirigido al inicio de sesión</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="loadingOverlay" class="logout-loading">
+  <div class="loading-content">
+    <div class="preloader-wrapper small active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>
+    <p>Cerrando sesión...</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/clientes.js"></script>
+</body>
+</html>
