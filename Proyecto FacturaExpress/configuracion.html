@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacturaExpress – Configuración</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/accessibility-bootstrap.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="fx-sidebar">
+  <a class="fx-sidebar-logo" href="index.html">
+    <div class="fx-logo-box">F</div>
+    <span class="fx-logo-text">FacturaExpress</span>
+  </a>
+  <div class="fx-sidebar-nav">
+    <a class="fx-nav-item" href="index.html"><i class="material-icons">dashboard</i> Panel Principal</a>
+    <a class="fx-nav-item" href="ventas.html"><i class="material-icons">shopping_cart</i> Gestión de Ventas</a>
+    <a class="fx-nav-item" href="facturacion.html"><i class="material-icons">description</i> Facturación Electrónica</a>
+    <a class="fx-nav-item" href="clientes.html"><i class="material-icons">group</i> Clientes</a>
+    <a class="fx-nav-item" href="reportes.html"><i class="material-icons">bar_chart</i> Reportes y Estadísticas</a>
+    <a class="fx-nav-item fx-active" href="configuracion.html"><i class="material-icons">settings</i> Configuración</a>
+  </div>
+  <div class="fx-sidebar-footer">
+    <a class="fx-nav-item fx-logout" href="#" id="showLogoutBtn"><i class="material-icons">logout</i> Cerrar Sesión</a>
+  </div>
+</div>
+
+<!-- ÁREA PRINCIPAL -->
+<div class="fx-main-area">
+
+  <!-- TOPBAR -->
+  <div class="fx-topbar">
+    <span class="fx-topbar-title">Configuración</span>
+    <div class="fx-topbar-dian"><span class="pulse-dot"></span> DIAN SINCRONIZADO</div>
+    <div class="fx-topbar-user">
+      <div class="fx-topbar-user-info">
+        <div class="fx-topbar-user-name" id="userName">Jhon H. Romero</div>
+        <div class="fx-topbar-user-role" id="userRole">Admin del Sistema</div>
+      </div>
+      <i class="material-icons" style="color:#1a2535;font-size:30px;">account_circle</i>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL DE CONFIGURACIÓN -->
+  <div class="fx-content" id="configuracionModule">
+    
+    <!-- SECCIÓN: DATOS DE LA EMPRESA -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">business</i>
+        <div>
+          <h3>Datos de la empresa</h3>
+          <div class="config-sub">Información jurídica y tributaria</div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">credit_card</i>
+          <input id="nit_empresa" type="text" class="validate" value="900.123.456-7">
+          <label for="nit_empresa">NIT / Identificación</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">storefront</i>
+          <input id="razon_social" type="text" class="validate" value="Industrias Metalúrgicas S.A.S">
+          <label for="razon_social">Razón Social</label>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">email</i>
+          <input id="email_facturacion" type="email" class="validate" value="facturacion@metalurgicasas.com">
+          <label for="email_facturacion">Email de facturación</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">phone</i>
+          <input id="telefono_empresa" type="text" class="validate" value="+57 601 555 7890">
+          <label for="telefono_empresa">Teléfono</label>
+        </div>
+      </div>
+      <div class="action-buttons-grid">
+        <a class="btn waves-effect waves-light btn-teal" id="guardarEmpresa" style="border-radius:40px;">
+          <i class="material-icons left">save</i>Guardar Cambios
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="recargarDatosDIAN" style="border-radius:40px;">
+          <i class="material-icons left">refresh</i>Recargar datos DIAN
+        </a>
+      </div>
+    </div>
+
+    <!-- CONFIGURACIÓN FISCAL (DIAN) -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">verified_user</i>
+        <div>
+          <h3>Configuración Fiscal (DIAN)</h3>
+          <div class="config-sub">Ajustes de facturación electrónica y firma digital</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Resolución DIAN Activa</span>
+        <span class="info-value" id="resolucionDIAN"><i class="material-icons tiny" style="font-size:14px;">receipt</i> 18764000001</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Certificado de Firma Digital</span>
+        <span class="expiry-badge" id="certificadoVence"><i class="material-icons tiny">schedule</i> Vence en 45 días</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Última sincronización</span>
+        <span class="info-value" id="ultimaSincronizacion">Hoy, 10:34 AM - Estado: Transmisión OK</span>
+      </div>
+      <div class="action-buttons-grid">
+        <a class="btn waves-effect waves-light btn-teal" id="sincronizarDIAN" style="border-radius:40px;">
+          <i class="material-icons left">sync</i>Sincronizar con DIAN
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="subirCertificado" style="border-radius:40px;">
+          <i class="material-icons left">publish</i>Subir nuevo certificado
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="verResolucion" style="border-radius:40px;">
+          <i class="material-icons left">visibility</i>Ver resolución
+        </a>
+      </div>
+    </div>
+
+    <!-- PERFILES DE USUARIO + ROLES Y ACCESOS -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">group</i>
+        <div>
+          <h3>Perfiles de usuario</h3>
+          <div class="config-sub">Gestiona los accesos y roles del equipo de trabajo</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l4">
+          <div class="client-card">
+            <i class="material-icons medium" style="color:var(--accent);">admin_panel_settings</i>
+            <div class="client-name">Administradores</div>
+            <div class="client-email">Acceso total al sistema</div>
+            <a class="btn-flat waves-effect btn-teal-text gestionarRol" data-rol="admin" style="margin-top:8px;">
+              <i class="material-icons left">edit</i>Gestionar
+            </a>
+          </div>
+        </div>
+        <div class="col s12 m6 l4">
+          <div class="client-card">
+            <i class="material-icons medium" style="color:var(--accent);">point_of_sale</i>
+            <div class="client-name">Vendedores</div>
+            <div class="client-email">Ventas, clientes, facturación</div>
+            <a class="btn-flat waves-effect btn-teal-text gestionarRol" data-rol="vendedor" style="margin-top:8px;">
+              <i class="material-icons left">edit</i>Gestionar
+            </a>
+          </div>
+        </div>
+        <div class="col s12 m6 l4">
+          <div class="client-card">
+            <i class="material-icons medium" style="color:var(--accent);">fact_check</i>
+            <div class="client-name">Contadores / Reportes</div>
+            <div class="client-email">Acceso a reportes y libros</div>
+            <a class="btn-flat waves-effect btn-teal-text gestionarRol" data-rol="contador" style="margin-top:8px;">
+              <i class="material-icons left">edit</i>Gestionar
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="action-buttons-grid" style="margin-top: 10px;">
+        <a class="btn waves-effect btn-teal" id="administrarUsuarios">
+          <i class="material-icons left">manage_accounts</i>Administrar Usuarios
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="gestionarRolesPermisos">
+          <i class="material-icons left">lock_outline</i>Gestionar Roles y Permisos
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="verActividadReciente">
+          <i class="material-icons left">history</i>Ver Actividad Reciente
+        </a>
+      </div>
+    </div>
+
+    <!-- NOTIFICACIONES -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">notifications_active</i>
+        <div>
+          <h3>Notificaciones</h3>
+          <div class="config-sub">Configura qué alertas y recordatorios deseas recibir</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="toggle-switch-custom">
+            <span><i class="material-icons tiny" style="vertical-align:middle;">email</i> Notificaciones por email</span>
+            <div class="switch">
+              <label> Off <input type="checkbox" id="notifEmail" checked> <span class="lever"></span> On </label>
+            </div>
+          </div>
+          <div class="toggle-switch-custom">
+            <span><i class="material-icons tiny">notifications</i> Notificaciones push</span>
+            <div class="switch"><label> Off <input type="checkbox" id="notifPush" checked> <span class="lever"></span> On </label></div>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="toggle-switch-custom">
+            <span><i class="material-icons tiny">receipt</i> Alertas de facturación (DIAN)</span>
+            <div class="switch"><label> Off <input type="checkbox" id="alertasFacturacion" checked> <span class="lever"></span> On </label></div>
+          </div>
+          <div class="toggle-switch-custom">
+            <span><i class="material-icons tiny">event</i> Recordatorios automáticos</span>
+            <div class="switch"><label> Off <input type="checkbox" id="recordatorios" checked> <span class="lever"></span> On </label></div>
+          </div>
+        </div>
+      </div>
+      <div class="action-buttons-grid">
+        <a class="btn waves-effect btn-teal" id="guardarNotificaciones" style="border-radius:40px;">
+          <i class="material-icons left">save</i>Guardar preferencias
+        </a>
+      </div>
+    </div>
+
+    <!-- SEGURIDAD -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">security</i>
+        <div>
+          <h3>Seguridad</h3>
+          <div class="config-sub">Administra contraseñas y opciones de acceso seguro</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="info-row">
+            <span class="info-label"><i class="material-icons tiny">vpn_key</i> Último cambio contraseña</span>
+            <span class="info-value" id="ultimoCambioPass">10 de febrero 2026</span>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="info-row">
+            <span class="info-label"><i class="material-icons tiny">devices</i> Dispositivos conectados</span>
+            <span class="info-value" id="dispositivosConectados">2 sesiones activas</span>
+          </div>
+        </div>
+      </div>
+      <div class="action-buttons-grid">
+        <a class="btn waves-effect waves-light btn-teal" id="cambiarContrasena">
+          <i class="material-icons left">lock_reset</i>Cambiar Contraseña
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="dosFactores">
+          <i class="material-icons left">pin</i>Autenticación de Dos Factores
+        </a>
+        <a class="btn waves-effect btn-outline-accent" id="dispositivosConectadosBtn">
+          <i class="material-icons left">phonelink</i>Dispositivos Conectados
+        </a>
+      </div>
+      <hr>
+      <div class="info-row">
+        <span class="info-label">Registro de accesos recientes:</span>
+        <span class="info-value" id="ultimoAcceso">IP 190.84.45.12 - Bogotá, hace 12 min</span>
+      </div>
+    </div>
+
+    <!-- ACCESIBILIDAD -->
+    <div class="config-section-card">
+      <div class="config-title">
+        <i class="material-icons">accessibility_new</i>
+        <div>
+          <h3>Accesibilidad</h3>
+          <div class="config-sub">Alto contraste · Tamaño de texto · Modo oscuro</div>
+        </div>
+      </div>
+      <div class="toggle-switch-custom">
+        <span><i class="material-icons tiny">contrast</i> Modo alto contraste</span>
+        <div class="switch"><label> Off <input type="checkbox" id="highContrastToggle"> <span class="lever"></span> On </label></div>
+      </div>
+      
+      <div class="toggle-switch-custom">
+        <span><i class="material-icons tiny">dark_mode</i> Activar modo oscuro</span>
+        <div class="switch"><label> Off <input type="checkbox" id="darkModeToggle"> <span class="lever"></span> On </label></div>
+      </div>
+
+      <div class="info-row" style="border-bottom: none;">
+        <span class="info-label"><i class="material-icons tiny">text_fields</i> Tamaño de texto:</span>
+        <div class="text-size-selector">
+          <span class="size-badge" data-size="small">Pequeño</span>
+          <span class="size-badge active" data-size="medium">Mediano</span>
+          <span class="size-badge" data-size="large">Grande</span>
+        </div>
+      </div>
+      <div class="action-buttons-grid" style="margin-top: 5px;">
+        <a class="btn waves-effect btn-teal" id="applyAccessBtn">
+          <i class="material-icons left">check</i>Aplicar Preferencias
+        </a>
+      </div>
+    </div>
+    
+  </div><!-- /fx-content -->
+
+  <!-- FOOTER -->
+  <div class="fx-footer">
+    <span>© 2026 FACTURAEXPRESS – FACTURACIÓN SEGURA</span>
+    <div class="fx-footer-statuses">
+      <div class="fx-f-status"><span class="pulse-dot"></span> MOTOR FISCAL ACTIVO</div>
+      <div class="fx-f-status"><span class="pulse-dot"></span> BACKUPS AL DÍA</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE CIERRE DE SESIÓN -->
+<div id="logoutModal" class="modal logout-modal">
+  <div class="modal-content">
+    <div class="logout-header">
+      <div class="logout-icon">
+        <i class="material-icons">exit_to_app</i>
+      </div>
+      <h4>¿Cerrar sesión?</h4>
+      <p>Estás a punto de salir del sistema</p>
+    </div>
+    
+    <div class="logout-body">
+      <div class="warning-compact">
+        <i class="material-icons">warning</i>
+        <div>
+          <strong>¡Atención!</strong>
+          <span> Los cambios no guardados se perderán</span>
+        </div>
+      </div>
+      
+      <div class="session-compact">
+        <div class="session-title-compact">
+          <i class="material-icons tiny">info</i>
+          INFORMACIÓN DE SESIÓN
+        </div>
+        <div class="session-grid">
+          <div class="session-item">
+            <span class="session-label-compact">Usuario</span>
+            <span class="session-value-compact" id="modalSessionUser">Jhon H. Romero</span>
+          </div>
+          <div class="session-item">
+            <span class="session-label-compact">Rol</span>
+            <span class="session-value-compact" id="modalSessionRole">Administrador</span>
+          </div>
+          <div class="session-item">
+            <span class="session-label-compact">Sesión activa</span>
+            <span class="session-value-compact" id="modalSessionTime">--</span>
+          </div>
+          <div class="session-item">
+            <span class="session-label-compact">Última actividad</span>
+            <span class="session-value-compact" id="modalLastActivity">Ahora</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-buttons-compact">
+        <button class="btn btn-cancel-compact modal-close">
+          <i class="material-icons left" style="font-size: 16px;">close</i>
+          Cancelar
+        </button>
+        <button class="btn btn-logout-compact" id="confirmLogoutBtn">
+          <i class="material-icons left" style="font-size: 16px;">logout</i>
+          Salir Ahora
+        </button>
+      </div>
+      
+      <div class="security-note-compact">
+        <span class="pulse-dot"></span>
+        <span>Serás redirigido al inicio de sesión</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" class="logout-loading">
+  <div class="loading-content">
+    <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left"><div class="circle"></div></div>
+        <div class="gap-patch"><div class="circle"></div></div>
+        <div class="circle-clipper right"><div class="circle"></div></div>
+      </div>
+    </div>
+    <p>Cerrando sesión...</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/configuracion.js"></script>
+</body>
+</html>
