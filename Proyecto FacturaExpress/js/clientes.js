@@ -46,54 +46,6 @@ const ClientesModule = {
         FacturaExpress.storage.set('clientes', this.state.clientes);
     },
     
-    // Renderizar tarjetas de clientes
-    renderClientes: function() {
-        const container = document.getElementById('clientesGrid');
-        if (!container) return;
-        
-        const clientesFiltrados = this.filtrarClientes();
-        
-        if (clientesFiltrados.length === 0) {
-            container.innerHTML = `
-                <div class="col s12">
-                    <div class="center-align" style="padding: 60px 20px;">
-                        <i class="material-icons" style="font-size: 64px; color: #90a4ae;">person_outline</i>
-                        <p style="margin-top: 16px; color: #90a4ae;">No se encontraron clientes</p>
-                        <a class="btn btn-teal" onclick="document.getElementById('modalOverlay').classList.add('open')">
-                            <i class="material-icons left">person_add</i>Agregar Cliente
-                        </a>
-                    </div>
-                </div>
-            `;
-            return;
-        }
-        
-        container.innerHTML = '';
-        
-        clientesFiltrados.forEach(cliente => {
-            const card = document.createElement('div');
-            card.className = 'col s12 m6 l4';
-            card.style.marginBottom = '18px';
-            card.dataset.id = cliente.id;
-            card.innerHTML = `
-                <div class="client-card">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                        <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
-                        <span class="client-id-tag">ID: ${cliente.identificacion}</span>
-                    </div>
-                    <div class="client-name">${this.escapeHtml(cliente.nombre)}</div>
-                    <div class="client-email">${this.escapeHtml(cliente.email || 'Sin email')}</div>
-                    <div class="client-actions">
-                        <a class="btn-flat ver-perfil" data-id="${cliente.id}" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
-                        <a class="btn-flat nueva-venta" data-id="${cliente.id}" data-nombre="${this.escapeHtml(cliente.nombre)}" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-        
-        this.setupClientButtons();
-    },
     
     // Escapar HTML para prevenir XSS
     escapeHtml: function(text) {
@@ -291,6 +243,57 @@ const ClientesModule = {
                 modal.classList.remove('open');
             }
         });
+    },
+    
+    // Renderizar tarjetas de clientes - OPTIMIZADO con DocumentFragment
+    renderClientes: function() {
+        const container = document.getElementById('clientesGrid');
+        if (!container) return;
+
+        const clientesFiltrados = this.filtrarClientes();
+        const fragment = document.createDocumentFragment();
+
+        if (clientesFiltrados.length === 0) {
+            container.innerHTML = `
+                <div class="col s12">
+                    <div class="center-align" style="padding: 60px 20px;">
+                        <i class="material-icons" style="font-size: 64px; color: #90a4ae;">person_outline</i>
+                        <p style="margin-top: 16px; color: #90a4ae;">No se encontraron clientes</p>
+                        <a class="btn btn-teal" onclick="document.getElementById('modalOverlay').classList.add('open')">
+                            <i class="material-icons left">person_add</i>Agregar Cliente
+                        </a>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        clientesFiltrados.forEach(cliente => {
+            const card = document.createElement('div');
+            card.className = 'col s12 m6 l4';
+            card.style.marginBottom = '18px';
+            card.dataset.id = cliente.id;
+            card.innerHTML = `
+                <div class="client-card">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                        <i class="material-icons" style="font-size:34px;color:#90a4ae;">account_circle</i>
+                        <span class="client-id-tag">ID: ${cliente.identificacion}</span>
+                    </div>
+                    <div class="client-name">${this.escapeHtml(cliente.nombre)}</div>
+                    <div class="client-email">${this.escapeHtml(cliente.email || 'Sin email')}</div>
+                    <div class="client-actions">
+                        <a class="btn-flat ver-perfil" data-id="${cliente.id}" style="color:#1a2535;font-weight:700;padding:0;">Ver Perfil</a>
+                        <a class="btn-flat nueva-venta" data-id="${cliente.id}" data-nombre="${this.escapeHtml(cliente.nombre)}" style="color:#1abc9c;font-weight:700;padding:0;">Nueva Venta</a>
+                    </div>
+                </div>
+            `;
+            fragment.appendChild(card);
+        });
+
+        container.appendChild(fragment);
+        this.setupClientButtons();
     }
 };
 

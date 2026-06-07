@@ -49,24 +49,26 @@ const FacturacionModule = {
         this.renderFacturas();
     },
     
-    // Aplicar filtros de búsqueda
+    // Aplicar filtros de búsqueda - OPTIMIZADO
     aplicarFiltros: function() {
-        let filtradas = [...this.state.facturas];
+        const busqueda = this.state.filtroBusqueda.toLowerCase();
+        const filtroEstado = this.state.filtroEstado;
         
-        // Filtro por búsqueda (número de factura o cliente)
-        if (this.state.filtroBusqueda) {
-            const busqueda = this.state.filtroBusqueda.toLowerCase();
-            filtradas = filtradas.filter(f => 
-                f.numero.toLowerCase().includes(busqueda) ||
-                f.cliente.toLowerCase().includes(busqueda) ||
-                f.clienteIdentificacion.includes(busqueda)
-            );
-        }
-        
-        // Filtro por estado
-        if (this.state.filtroEstado !== 'todos') {
-            filtradas = filtradas.filter(f => f.estado === this.state.filtroEstado);
-        }
+        let filtradas = this.state.facturas.filter(f => {
+            // Filtro por estado (más rápido primero)
+            if (filtroEstado !== 'todos' && f.estado !== filtroEstado) {
+                return false;
+            }
+            
+            // Filtro por búsqueda
+            if (busqueda) {
+                return f.numero.toLowerCase().includes(busqueda) ||
+                       f.cliente.toLowerCase().includes(busqueda) ||
+                       f.clienteIdentificacion.includes(busqueda);
+            }
+            
+            return true;
+        });
         
         this.state.facturasFiltradas = filtradas;
         this.state.totalPaginas = Math.ceil(filtradas.length / this.state.itemsPorPagina);
