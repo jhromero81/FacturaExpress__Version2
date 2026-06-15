@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FacturaExpress – Iniciar Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/accessibility-bootstrap.js"></script>
+  <style>
+    /* Decoración de fondo */
+    body.fx-login-page { position: relative; }
+    
+    body.fx-login-page::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,188,156,.12) 0%, transparent 70%);
+      top: -100px; left: -100px;
+    }
+    body.fx-login-page::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,188,156,.08) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+    }
+
+    .login-wrapper {
+      width: 420px;
+      max-width: 95%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .logo-box {
+      width: 48px; height: 48px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700; color: #fff; font-size: 22px;
+    }
+
+    .logo-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px; font-weight: 700;
+      color: #1a2535;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #90a4ae;
+      margin-bottom: 32px;
+    }
+
+    .input-field input:focus {
+      border-bottom-color: var(--accent) !important;
+      box-shadow: 0 1px 0 0 var(--accent) !important;
+    }
+    .input-field input:focus + label,
+    .input-field input:focus ~ label {
+      color: var(--accent) !important;
+    }
+    .input-field .prefix { color: #90a4ae; }
+    .input-field input:focus ~ .prefix { color: var(--accent); }
+
+    .btn-login {
+      width: 100%;
+      background-color: var(--accent) !important;
+      height: 46px; line-height: 46px;
+      font-size: 15px; font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 8px !important;
+      margin-top: 8px;
+    }
+    .btn-login:hover { background-color: var(--accent-dk) !important; }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #90a4ae;
+    }
+
+    .login-footer a { color: var(--accent); cursor: pointer; }
+
+    .dian-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(26,188,156,0.1);
+      color: var(--accent);
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+      justify-content: center;
+      width: auto;
+    }
+
+    .error-msg {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* Selector de accesibilidad flotante en login */
+    .login-access-nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .login-access-nav .btn-floating {
+      background-color: #ffffff !important;
+      backdrop-filter: blur(5px) !important;
+      -webkit-backdrop-filter: blur(5px) !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+      border: 1px solid #e0e0e0 !important;
+    }
+    .login-access-nav .btn-floating i {
+      color: #546e7a !important;
+    }
+    .login-access-nav .btn-floating:hover {
+      background-color: var(--accent) !important;
+    }
+  </style>
+</head>
+<body class="fx-login-page">
+
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <!-- Selector de accesibilidad previo al login -->
+    <div class="login-access-nav">
+      <a class="btn-floating btn-small waves-effect" id="loginDark" title="Modo Oscuro">
+        <i class="material-icons">dark_mode</i>
+      </a>
+      <a class="btn-floating btn-small waves-effect" id="loginContrast" title="Alto Contraste">
+        <i class="material-icons">contrast</i>
+      </a>
+    </div>
+
+    <div class="login-logo">
+      <div class="logo-box">F</div>
+      <span class="logo-text">FacturaExpress</span>
+    </div>
+    <p class="login-subtitle">Sistema de Facturación Electrónica DIAN</p>
+
+    <div class="dian-badge">
+      <div class="pulse-dot"></div> Servidor DIAN Activo
+    </div>
+
+    <div class="input-field">
+      <i class="material-icons prefix">person</i>
+      <input id="loginUser" type="text" autocomplete="username">
+      <label for="loginUser">Usuario / NIT</label>
+    </div>
+
+    <div class="input-field">
+      <i class="material-icons prefix">lock</i>
+      <input id="loginPass" type="password">
+      <label for="loginPass">Contraseña</label>
+      <i class="material-icons" id="togglePassword" style="position:absolute; right:10px; top:12px; cursor:pointer; color:#90a4ae;">visibility</i>
+    </div>
+
+    <p class="error-msg" id="errorMsg" role="alert">
+      <i class="material-icons" style="font-size:14px;vertical-align:middle;">error_outline</i>
+      Usuario o contraseña incorrectos
+    </p>
+
+    <a id="loginSubmit" class="btn btn-login waves-effect waves-light">
+      <i class="material-icons left">login</i>Iniciar Sesión
+    </a>
+
+    <div class="login-footer">
+      ¿Olvidaste tu contraseña? <a>Recuperar acceso</a><br><br>
+      ¿Problemas de acceso? <a>Contacte al administrador</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/core.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // El core se encarga de la inicialización global y de verificar si ya hay sesión
+    const loginSubmit = document.getElementById('loginSubmit');
+    if (loginSubmit) {
+      loginSubmit.addEventListener('click', intentarLogin);
+    }
+    
+    // Toggle de visibilidad de contraseña
+    const passEl = document.getElementById('loginPass');
+    const togglePass = document.getElementById('togglePassword');
+    togglePass.addEventListener('click', () => {
+      const isPass = passEl.getAttribute('type') === 'password';
+      passEl.setAttribute('type', isPass ? 'text' : 'password');
+      togglePass.textContent = isPass ? 'visibility_off' : 'visibility';
+    });
+
+    // Acciones de accesibilidad inmediatas
+    document.getElementById('loginDark').addEventListener('click', () => {
+      FacturaExpress.accessibility.toggleDarkMode();
+    });
+    document.getElementById('loginContrast').addEventListener('click', () => {
+      FacturaExpress.accessibility.toggleHighContrast();
+    });
+
+    function intentarLogin() {
+      const userEl = document.getElementById('loginUser');
+      const user = userEl.value.trim();
+      const pass = passEl.value.trim();
+      const err  = document.getElementById('errorMsg');
+
+      if (user && pass) {
+        err.style.display = 'none';
+        
+        // Feedback visual de carga
+        loginSubmit.classList.add('disabled');
+        loginSubmit.innerHTML = '<i class="material-icons left">sync</i>Ingresando...';
+        
+        // Persistir sesión y datos simulados para que el sistema reconozca al usuario
+        FacturaExpress.storage.set('session_active', true);
+        FacturaExpress.storage.set('login_time', new Date().toISOString());
+        FacturaExpress.storage.set('user_data', {
+            id: 1,
+            nombre: user, // Usamos el input para personalizar la bienvenida
+            rol: 'Administrador',
+            email: 'admin@facturaexpress.com',
+            avatar: null
+        });
+
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 800); // Simulamos una pequeña latencia de red
+      } else {
+        err.style.display = 'block';
+        if (!user) userEl.focus();
+        else if (!pass) passEl.focus();
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') intentarLogin();
+    });
+  });
+</script>
+</body>
+</html>
